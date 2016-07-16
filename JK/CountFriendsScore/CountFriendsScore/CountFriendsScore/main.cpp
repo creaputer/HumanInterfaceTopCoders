@@ -9,57 +9,42 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
-#include <forward_list>
+#include <set>
 
 class Counter
 {
 public:
     int highestScore(const std::vector<std::string> & friends)
     {
-        const auto YES = 'Y';
+        const auto FRIEND = 'Y';
         const auto MAX_SIZE = friends.size();
-        
-        auto maxFriends = int{0};
-        for (auto _1 = 0; _1 < MAX_SIZE; ++_1)
+        auto vFriends = std::vector<std::set<int>>{MAX_SIZE};
+        for (auto me = 0; me < MAX_SIZE; ++me)
         {
-            auto relations = int{0};
-            auto myFriends = std::forward_list<int>{};
-            for (auto _2 = 0; _2 < MAX_SIZE; ++_2)
+            for (auto you = 0; you < MAX_SIZE; ++you)
             {
-                if (_1 == _2) continue;
+                if (me == you) continue;
+                if (friends.at(me).at(you) != FRIEND) continue;
                 
-                if (friends.at(_1).at(_2) == YES)
+                vFriends.at(me).insert(you);
+                
+                for (auto yourfriend = 0; yourfriend < MAX_SIZE; ++yourfriend)
                 {
-                    for (auto _3 = 0; _3 < MAX_SIZE; ++_3)
-                    {
-                        auto redundancy = bool{false};
-                        for (const auto & my : myFriends)
-                        {
-                            if (my == _2)
-                            {
-                                redundancy = true;
-                                break;
-                            }
-                        }
-                        
-                        if (redundancy == false)
-                        {
-                            if (friends.at(_3).at(_2) == YES)
-                            {
-                                ++relations;
-                                myFriends.push_front(_3);
-                            }
-                        }
-                    }
+                    if (me == yourfriend) continue;
+                    if (friends.at(you).at(yourfriend) != FRIEND) continue;
+                    
+                    vFriends.at(me).insert(yourfriend);
                 }
             }
-            
-            maxFriends = std::max(maxFriends, relations);
         }
         
-        return maxFriends;
+        const auto mostFamous = std::max_element(vFriends.cbegin(), vFriends.cend(), [](std::set<int> left, std::set<int> right)
+         {
+             return left.size() < right.size();
+         });
+        
+        return static_cast<int>(mostFamous->size());
     }
-    
 };
 
 int main(int argc, const char * argv[]) {
