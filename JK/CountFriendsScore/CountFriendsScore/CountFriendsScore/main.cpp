@@ -38,7 +38,7 @@ public:
             }
         }
         
-        const auto mostFamous = std::max_element(vFriends.cbegin(), vFriends.cend(), [](std::set<int> left, std::set<int> right)
+        const auto mostFamous = std::max_element(vFriends.cbegin(), vFriends.cend(), [](const auto & left, const auto & right)
          {
              return left.size() < right.size();
          });
