@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27CE18231D3A4DDE00D31737 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE18221D3A4DDE00D31737 /* main.swift */; };
+		27CE18301D3CDF5700D31737 /* TestFriendsScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE182F1D3CDF5700D31737 /* TestFriendsScore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +26,20 @@
 /* Begin PBXFileReference section */
 		27CE181F1D3A4DDE00D31737 /* FriendsScore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FriendsScore; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CE18221D3A4DDE00D31737 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		27CE182D1D3CDF5600D31737 /* TestFriendsScore.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestFriendsScore.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27CE182F1D3CDF5700D31737 /* TestFriendsScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFriendsScore.swift; sourceTree = "<group>"; };
+		27CE18311D3CDF5700D31737 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		27CE181C1D3A4DDE00D31737 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27CE182A1D3CDF5600D31737 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				27CE18211D3A4DDE00D31737 /* FriendsScore */,
+				27CE182E1D3CDF5700D31737 /* TestFriendsScore */,
 				27CE18201D3A4DDE00D31737 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				27CE181F1D3A4DDE00D31737 /* FriendsScore */,
+				27CE182D1D3CDF5600D31737 /* TestFriendsScore.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +73,15 @@
 				27CE18221D3A4DDE00D31737 /* main.swift */,
 			);
 			path = FriendsScore;
+			sourceTree = "<group>";
+		};
+		27CE182E1D3CDF5700D31737 /* TestFriendsScore */ = {
+			isa = PBXGroup;
+			children = (
+				27CE182F1D3CDF5700D31737 /* TestFriendsScore.swift */,
+				27CE18311D3CDF5700D31737 /* Info.plist */,
+			);
+			path = TestFriendsScore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +104,23 @@
 			productReference = 27CE181F1D3A4DDE00D31737 /* FriendsScore */;
 			productType = "com.apple.product-type.tool";
 		};
+		27CE182C1D3CDF5600D31737 /* TestFriendsScore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27CE18341D3CDF5700D31737 /* Build configuration list for PBXNativeTarget "TestFriendsScore" */;
+			buildPhases = (
+				27CE18291D3CDF5600D31737 /* Sources */,
+				27CE182A1D3CDF5600D31737 /* Frameworks */,
+				27CE182B1D3CDF5600D31737 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestFriendsScore;
+			productName = TestFriendsScore;
+			productReference = 27CE182D1D3CDF5600D31737 /* TestFriendsScore.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +132,9 @@
 				ORGANIZATIONNAME = JunKyo;
 				TargetAttributes = {
 					27CE181E1D3A4DDE00D31737 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					27CE182C1D3CDF5600D31737 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -110,9 +152,20 @@
 			projectRoot = "";
 			targets = (
 				27CE181E1D3A4DDE00D31737 /* FriendsScore */,
+				27CE182C1D3CDF5600D31737 /* TestFriendsScore */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27CE182B1D3CDF5600D31737 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		27CE181B1D3A4DDE00D31737 /* Sources */ = {
@@ -120,6 +173,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				27CE18231D3A4DDE00D31737 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27CE18291D3CDF5600D31737 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27CE18301D3CDF5700D31737 /* TestFriendsScore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +283,28 @@
 			};
 			name = Release;
 		};
+		27CE18321D3CDF5700D31737 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TestFriendsScore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Creo.TestFriendsScore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		27CE18331D3CDF5700D31737 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TestFriendsScore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Creo.TestFriendsScore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -239,6 +322,15 @@
 			buildConfigurations = (
 				27CE18271D3A4DDE00D31737 /* Debug */,
 				27CE18281D3A4DDE00D31737 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27CE18341D3CDF5700D31737 /* Build configuration list for PBXNativeTarget "TestFriendsScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27CE18321D3CDF5700D31737 /* Debug */,
+				27CE18331D3CDF5700D31737 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
