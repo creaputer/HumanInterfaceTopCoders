@@ -73,14 +73,20 @@ int main(int argc, const char * argv[]) {
     
     CorporationSalary corporationSalary;
     vector <string> relations = {
+        "N"
+    };
+    
+    long total = corporationSalary.totalSalary(relations);
+    cout<< "0) salary: " << total << endl;
+    
+    
+    relations = {
         "NNYN",
         "NNYN",
         "NNNN",
         "NYYN"
     };
-    
-    long total = corporationSalary.totalSalary(relations);
-    
+    total = corporationSalary.totalSalary(relations);
     cout<< "1) salary: " << total << endl;
     
     
@@ -92,10 +98,30 @@ int main(int argc, const char * argv[]) {
         "YNYNNN",
         "YNNYNN"
     };
-    
     total = corporationSalary.totalSalary(relations);
-    
     cout<< "2) salary: " << total << endl;
+    
+    
+    relations = {
+        "NYNNYN",
+        "NNNNNN",
+        "NNNNNN",
+        "NNYNNN",
+        "NNNNNN",
+        "NNNYYN"
+    };
+    total = corporationSalary.totalSalary(relations);
+    cout<< "3) salary: " << total << endl;
+    
+    relations = {
+        "NNNN",
+        "NNNN",
+        "NNNN",
+        "NNNN"
+      
+    };
+    total = corporationSalary.totalSalary(relations);
+    cout<< "4) salary: " << total << endl;
     
     return 0;
 }
