@@ -17,13 +17,13 @@ class ChessMetric {
     private:
         int mCount =0;
     
-        const std::vector<int> mMoveToX = {-1,  0,  1, -1, 1, -1, 0, 1, -2, -1,  1,  2, -2, -1, 1, 2};
-        const std::vector<int> mMoveToY = {-1, -1, -1,  0, 0,  1, 1, 1, -1, -2, -2, -1,  1,  2, 2, 1};
-    
         int mCandidateCurrent[100][100];
         int mCandidateNext[100][100];
         long long mChessCurrent[100][100];
         long long mChessNext[100][100];
+    
+        const std::vector<int> mMoveToX = {-1,  0,  1, -1, 1, -1, 0, 1, -2, -1,  1,  2, -2, -1, 1, 2};
+        const std::vector<int> mMoveToY = {-1, -1, -1,  0, 0,  1, 1, 1, -1, -2, -2, -1,  1,  2, 2, 1};
 
         void goUseMomory(int size);
         void goRecursive(int size, std::vector<int> start, std::vector<int> end, int numMoves, int hop);
@@ -103,7 +103,7 @@ void ChessMetric::goUseMomory(int size)
                     int nextX = i + mMoveToX[k];
                     int nextY = j + mMoveToY[k];
                     
-                    if( nextX < 0 || nextX > size || nextY < 0 || nextY > size)
+                    if( nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)
                         continue;
                     
                     mChessNext[nextX][nextY] += mChessCurrent[i][j];
@@ -119,7 +119,7 @@ void ChessMetric::goUseMomory(int size)
 
 void ChessMetric::goRecursive(int size, std::vector<int> start, std::vector<int> end, int numMoves, int hop){
     
-    if ( start[0] < 0 ||  start[0] > size || start[1] <0  || start[1] > size)
+    if ( start[0] < 0 ||  start[0] >= size || start[1] <0  || start[1] >= size)
         return; // fail
     
     if (hop > numMoves)
