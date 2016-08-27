@@ -8,19 +8,19 @@
 
 #include <iostream>
 #include <vector>
-#include <queue>
-
-#define CANDIDATE 1
+#include <array>
+#include <set>
 
 class ChessMetric {
     
     private:
         int mCount =0;
     
-        int mCandidateCurrent[100][100];
-        int mCandidateNext[100][100];
-        long long mChessCurrent[100][100];
-        long long mChessNext[100][100];
+        std::set<std::pair<int, int> > mCandidateCurrent;
+        std::set<std::pair<int, int> >mCandidateNext;
+    
+        std::array<std::array<long long, 100>, 100> mChessCurrent;
+        std::array<std::array<long long, 100>, 100> mChessNext;
     
         const std::vector<int> mMoveToX = {-1,  0,  1, -1, 1, -1, 0, 1, -2, -1,  1,  2, -2, -1, 1, 2};
         const std::vector<int> mMoveToY = {-1, -1, -1,  0, 0,  1, 1, 1, -1, -2, -2, -1,  1,  2, 2, 1};
@@ -50,18 +50,19 @@ long long ChessMetric::howMany(int size, std::vector<int> start, std::vector<int
         {
             for(int j=0; j <size; j++)
             {
-                mChessCurrent[i][j] = 0;
-                mChessNext[i][j] = 0;
-                mCandidateCurrent[i][j] = 0;
-                mCandidateNext[i][j] = 0;
+                mChessCurrent.at(i).at(j) = 0;
+                mChessNext.at(i).at(j) = 0;
             }
         }
+        
+        mCandidateCurrent.clear();
+        mCandidateNext.clear();
         
         int startX = start[0];
         int startY = start[1];
         
-        mCandidateNext[startX][startY] = 1;
-        mChessNext[startX][startY] =1;
+        mCandidateNext.insert(std::make_pair(startX, startY));
+        mChessNext.at(startX).at(startY) =1;
         
         for (int k =0 ; k < numMoves; k ++)
         {
@@ -71,7 +72,7 @@ long long ChessMetric::howMany(int size, std::vector<int> start, std::vector<int
         int endX = end[0];
         int endY = end[1];
         
-        return mChessNext[endX][endY];
+        return mChessNext.at(endX).at(endY);
     }
     
 }
@@ -83,34 +84,26 @@ void ChessMetric::goUseMomory(int size)
     {
         for(int j=0; j < size; j++)
         {
-            mChessCurrent[i][j] = mChessNext[i][j];
-            mChessNext[i][j] = 0;
-            
-            mCandidateCurrent[i][j] = mCandidateNext[i][j];
-            mCandidateNext[i][j] = 0;
+            mChessCurrent.at(i).at(j) = mChessNext.at(i).at(j);
+            mChessNext.at(i).at(j) = 0;
         }
     }
     
+    mCandidateCurrent = mCandidateNext;
+    mCandidateNext.clear();
     
-    for (int i=0 ; i < size; i ++)
+    for(auto point : mCandidateCurrent)
     {
-        for(int j =0; j < size; j ++)
+        for(int k =0; k < mMoveToX.size() ; k++)
         {
-            if (mCandidateCurrent[i][j] == CANDIDATE )
-            {
-                for(int k =0; k < mMoveToX.size() ; k++)
-                {
-                    int nextX = i + mMoveToX[k];
-                    int nextY = j + mMoveToY[k];
-                    
-                    if( nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)
-                        continue;
-                    
-                    mChessNext[nextX][nextY] += mChessCurrent[i][j];
-                    mCandidateNext[nextX][nextY] = CANDIDATE;
-                }
-                
-            }
+            int nextX = point.first + mMoveToX[k];
+            int nextY = point.second + mMoveToY[k];
+            
+            if( nextX < 0 || nextX >=size || nextY < 0 || nextY >= size)
+                continue;
+            
+            mChessNext.at(nextX).at(nextY) += mChessCurrent.at(point.first).at(point.second);
+            mCandidateNext.insert(std::make_pair(nextX, nextY));
         }
     }
     
