@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <array>
 
 #define CANDIDATE 1
 
@@ -17,10 +18,10 @@ class ChessMetric {
     private:
         int mCount =0;
     
-        int mCandidateCurrent[100][100];
-        int mCandidateNext[100][100];
-        long long mChessCurrent[100][100];
-        long long mChessNext[100][100];
+        std::array<std::array<int, 100>, 100> mCandidateCurrent;
+        std::array<std::array<int, 100>, 100>  mCandidateNext;
+        std::array<std::array<long long, 100>, 100> mChessCurrent;
+        std::array<std::array<long long, 100>, 100> mChessNext;
     
         const std::vector<int> mMoveToX = {-1,  0,  1, -1, 1, -1, 0, 1, -2, -1,  1,  2, -2, -1, 1, 2};
         const std::vector<int> mMoveToY = {-1, -1, -1,  0, 0,  1, 1, 1, -1, -2, -2, -1,  1,  2, 2, 1};
@@ -50,18 +51,18 @@ long long ChessMetric::howMany(int size, std::vector<int> start, std::vector<int
         {
             for(int j=0; j <size; j++)
             {
-                mChessCurrent[i][j] = 0;
-                mChessNext[i][j] = 0;
-                mCandidateCurrent[i][j] = 0;
-                mCandidateNext[i][j] = 0;
+                mChessCurrent.at(i).at(j) = 0;
+                mChessNext.at(i).at(j) = 0;
+                mCandidateCurrent.at(i).at(j) = 0;
+                mCandidateNext.at(i).at(j) = 0;
             }
         }
         
         int startX = start[0];
         int startY = start[1];
         
-        mCandidateNext[startX][startY] = 1;
-        mChessNext[startX][startY] =1;
+        mCandidateNext.at(startX).at(startY) = 1;
+        mChessNext.at(startX).at(startY) =1;
         
         for (int k =0 ; k < numMoves; k ++)
         {
@@ -71,7 +72,7 @@ long long ChessMetric::howMany(int size, std::vector<int> start, std::vector<int
         int endX = end[0];
         int endY = end[1];
         
-        return mChessNext[endX][endY];
+        return mChessNext.at(endX).at(endY);
     }
     
 }
@@ -83,11 +84,11 @@ void ChessMetric::goUseMomory(int size)
     {
         for(int j=0; j < size; j++)
         {
-            mChessCurrent[i][j] = mChessNext[i][j];
-            mChessNext[i][j] = 0;
+            mChessCurrent.at(i).at(j) = mChessNext.at(i).at(j);
+            mChessNext.at(i).at(j) = 0;
             
-            mCandidateCurrent[i][j] = mCandidateNext[i][j];
-            mCandidateNext[i][j] = 0;
+            mCandidateCurrent.at(i).at(j)= mCandidateNext.at(i).at(j);
+            mCandidateNext.at(i).at(j) = 0;
         }
     }
     
@@ -96,7 +97,7 @@ void ChessMetric::goUseMomory(int size)
     {
         for(int j =0; j < size; j ++)
         {
-            if (mCandidateCurrent[i][j] == CANDIDATE )
+            if (mCandidateCurrent.at(i).at(j) == CANDIDATE )
             {
                 for(int k =0; k < mMoveToX.size() ; k++)
                 {
@@ -106,8 +107,8 @@ void ChessMetric::goUseMomory(int size)
                     if( nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)
                         continue;
                     
-                    mChessNext[nextX][nextY] += mChessCurrent[i][j];
-                    mCandidateNext[nextX][nextY] = CANDIDATE;
+                    mChessNext.at(nextX).at(nextY) += mChessCurrent.at(i).at(j);
+                    mCandidateNext.at(nextX).at(nextY) = CANDIDATE;
                 }
                 
             }
