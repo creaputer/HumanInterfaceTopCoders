@@ -172,3 +172,5 @@ fastlane/screenshots
 iOSInjectionProject/
 
 
+
+*.xcworkspacedata
